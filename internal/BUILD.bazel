@@ -31,10 +31,12 @@ cc_library(
     hdrs = ["@ortools//ortools/sat:swig_helper.h"],
     deps = [
         "@ortools//ortools/base",
+        "@ortools//ortools/base:basictypes",
         "@ortools//ortools/sat:cp_model_cc_proto",
         "@ortools//ortools/sat:cp_model_checker",
         "@ortools//ortools/sat:cp_model_solver",
         "@ortools//ortools/sat:sat_parameters_cc_proto",
+        "@ortools//ortools/sat:swig_helper",
     ],
 )
 

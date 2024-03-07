@@ -21,7 +21,7 @@
 
 %{
 #include <vector>
-#include "ortools/base/integral_types.h"
+#include "ortools/base/types.h"
 %}
 
 %go_import("fmt")
@@ -102,4 +102,3 @@
   $result = slice;
 }
 %enddef // end PROTO2_RETURN
-
