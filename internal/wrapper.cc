@@ -406,7 +406,6 @@ static void swig_acquire_pointer(Swig_memory** pmem, Type* ptr) {
   (*pmem)->swig_acquire_pointer(ptr);
 }
 
-
 SwigDirector_SolutionCallback::SwigDirector_SolutionCallback(int swig_p)
     : operations_research::sat::SolutionCallback(),
       go_val(swig_p), swig_mem(0)
@@ -439,8 +438,8 @@ SwigDirector_LogCallback::~SwigDirector_LogCallback()
 extern "C" void Swig_DirectorLogCallback_callback_NewMessage_internal_61c3741d79684a1b(int, _gostring_ message);
 void SwigDirector_LogCallback::NewMessage(std::string const &message) {
   _gostring_ swig_message;
-
-  swig_message = Swig_AllocateString((&message)->data(), (&message)->length());
+  
+  swig_message = Swig_AllocateString((&message)->data(), (&message)->length()); 
   Swig_DirectorLogCallback_callback_NewMessage_internal_61c3741d79684a1b(go_val, swig_message);
 }
 
@@ -450,11 +449,11 @@ extern "C" {
 
 void _wrap_Swig_free_internal_61c3741d79684a1b(void *_swig_go_0) {
   void *arg1 = (void *) 0 ;
-
-  arg1 = *(void **)&_swig_go_0;
-
+  
+  arg1 = *(void **)&_swig_go_0; 
+  
   Swig_free(arg1);
-
+  
 }
 
 
@@ -462,11 +461,11 @@ void *_wrap_Swig_malloc_internal_61c3741d79684a1b(intgo _swig_go_0) {
   int arg1 ;
   void *result = 0 ;
   void *_swig_go_result;
-
-  arg1 = (int)_swig_go_0;
-
+  
+  arg1 = (int)_swig_go_0; 
+  
   result = (void *)Swig_malloc(arg1);
-  *(void **)&_swig_go_result = (void *)result;
+  *(void **)&_swig_go_result = (void *)result; 
   return _swig_go_result;
 }
 
@@ -475,42 +474,42 @@ operations_research::sat::SolutionCallback *_wrap__swig_NewDirectorSolutionCallb
   int arg1 ;
   operations_research::sat::SolutionCallback *result = 0 ;
   operations_research::sat::SolutionCallback *_swig_go_result;
-
-  arg1 = (int)_swig_go_0;
-
+  
+  arg1 = (int)_swig_go_0; 
+  
   result = new SwigDirector_SolutionCallback(arg1);
-  *(operations_research::sat::SolutionCallback **)&_swig_go_result = (operations_research::sat::SolutionCallback *)result;
+  *(operations_research::sat::SolutionCallback **)&_swig_go_result = (operations_research::sat::SolutionCallback *)result; 
   return _swig_go_result;
 }
 
 
 void _wrap_DeleteDirectorSolutionCallback_internal_61c3741d79684a1b(operations_research::sat::SolutionCallback *_swig_go_0) {
   operations_research::sat::SolutionCallback *arg1 = (operations_research::sat::SolutionCallback *) 0 ;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  
   delete arg1;
-
+  
 }
 
 
 void _wrap_delete_SolutionCallback_internal_61c3741d79684a1b(operations_research::sat::SolutionCallback *_swig_go_0) {
   operations_research::sat::SolutionCallback *arg1 = (operations_research::sat::SolutionCallback *) 0 ;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  
   delete arg1;
-
+  
 }
 
 
 void _wrap_SolutionCallback_OnSolutionCallback_internal_61c3741d79684a1b(operations_research::sat::SolutionCallback *_swig_go_0) {
   operations_research::sat::SolutionCallback *arg1 = (operations_research::sat::SolutionCallback *) 0 ;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  
   ((operations_research::sat::SolutionCallback const *)arg1)->OnSolutionCallback();
-
+  
 }
 
 
@@ -518,11 +517,11 @@ long long _wrap_SolutionCallback_NumBooleans_internal_61c3741d79684a1b(operation
   operations_research::sat::SolutionCallback *arg1 = (operations_research::sat::SolutionCallback *) 0 ;
   int64_t result;
   long long _swig_go_result;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  
   result = (int64_t)((operations_research::sat::SolutionCallback const *)arg1)->NumBooleans();
-  _swig_go_result = result;
+  _swig_go_result = result; 
   return _swig_go_result;
 }
 
@@ -531,11 +530,11 @@ long long _wrap_SolutionCallback_NumBranches_internal_61c3741d79684a1b(operation
   operations_research::sat::SolutionCallback *arg1 = (operations_research::sat::SolutionCallback *) 0 ;
   int64_t result;
   long long _swig_go_result;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  
   result = (int64_t)((operations_research::sat::SolutionCallback const *)arg1)->NumBranches();
-  _swig_go_result = result;
+  _swig_go_result = result; 
   return _swig_go_result;
 }
 
@@ -544,11 +543,11 @@ long long _wrap_SolutionCallback_NumConflicts_internal_61c3741d79684a1b(operatio
   operations_research::sat::SolutionCallback *arg1 = (operations_research::sat::SolutionCallback *) 0 ;
   int64_t result;
   long long _swig_go_result;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  
   result = (int64_t)((operations_research::sat::SolutionCallback const *)arg1)->NumConflicts();
-  _swig_go_result = result;
+  _swig_go_result = result; 
   return _swig_go_result;
 }
 
@@ -557,11 +556,11 @@ long long _wrap_SolutionCallback_NumBinaryPropagations_internal_61c3741d79684a1b
   operations_research::sat::SolutionCallback *arg1 = (operations_research::sat::SolutionCallback *) 0 ;
   int64_t result;
   long long _swig_go_result;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  
   result = (int64_t)((operations_research::sat::SolutionCallback const *)arg1)->NumBinaryPropagations();
-  _swig_go_result = result;
+  _swig_go_result = result; 
   return _swig_go_result;
 }
 
@@ -570,11 +569,11 @@ long long _wrap_SolutionCallback_NumIntegerPropagations_internal_61c3741d79684a1
   operations_research::sat::SolutionCallback *arg1 = (operations_research::sat::SolutionCallback *) 0 ;
   int64_t result;
   long long _swig_go_result;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  
   result = (int64_t)((operations_research::sat::SolutionCallback const *)arg1)->NumIntegerPropagations();
-  _swig_go_result = result;
+  _swig_go_result = result; 
   return _swig_go_result;
 }
 
@@ -583,11 +582,11 @@ double _wrap_SolutionCallback_WallTime_internal_61c3741d79684a1b(operations_rese
   operations_research::sat::SolutionCallback *arg1 = (operations_research::sat::SolutionCallback *) 0 ;
   double result;
   double _swig_go_result;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  
   result = (double)((operations_research::sat::SolutionCallback const *)arg1)->WallTime();
-  _swig_go_result = result;
+  _swig_go_result = result; 
   return _swig_go_result;
 }
 
@@ -596,11 +595,11 @@ double _wrap_SolutionCallback_UserTime_internal_61c3741d79684a1b(operations_rese
   operations_research::sat::SolutionCallback *arg1 = (operations_research::sat::SolutionCallback *) 0 ;
   double result;
   double _swig_go_result;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  
   result = (double)((operations_research::sat::SolutionCallback const *)arg1)->UserTime();
-  _swig_go_result = result;
+  _swig_go_result = result; 
   return _swig_go_result;
 }
 
@@ -609,11 +608,11 @@ double _wrap_SolutionCallback_ObjectiveValue_internal_61c3741d79684a1b(operation
   operations_research::sat::SolutionCallback *arg1 = (operations_research::sat::SolutionCallback *) 0 ;
   double result;
   double _swig_go_result;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  
   result = (double)((operations_research::sat::SolutionCallback const *)arg1)->ObjectiveValue();
-  _swig_go_result = result;
+  _swig_go_result = result; 
   return _swig_go_result;
 }
 
@@ -622,11 +621,11 @@ double _wrap_SolutionCallback_BestObjectiveBound_internal_61c3741d79684a1b(opera
   operations_research::sat::SolutionCallback *arg1 = (operations_research::sat::SolutionCallback *) 0 ;
   double result;
   double _swig_go_result;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  
   result = (double)((operations_research::sat::SolutionCallback const *)arg1)->BestObjectiveBound();
-  _swig_go_result = result;
+  _swig_go_result = result; 
   return _swig_go_result;
 }
 
@@ -636,12 +635,12 @@ long long _wrap_SolutionCallback_SolutionIntegerValue_internal_61c3741d79684a1b(
   int arg2 ;
   int64_t result;
   long long _swig_go_result;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-  arg2 = (int)_swig_go_1;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  arg2 = (int)_swig_go_1; 
+  
   result = (int64_t)(arg1)->SolutionIntegerValue(arg2);
-  _swig_go_result = result;
+  _swig_go_result = result; 
   return _swig_go_result;
 }
 
@@ -651,23 +650,23 @@ bool _wrap_SolutionCallback_SolutionBooleanValue_internal_61c3741d79684a1b(opera
   int arg2 ;
   bool result;
   bool _swig_go_result;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-  arg2 = (int)_swig_go_1;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  arg2 = (int)_swig_go_1; 
+  
   result = (bool)(arg1)->SolutionBooleanValue(arg2);
-  _swig_go_result = result;
+  _swig_go_result = result; 
   return _swig_go_result;
 }
 
 
 void _wrap_SolutionCallback_StopSearch_internal_61c3741d79684a1b(operations_research::sat::SolutionCallback *_swig_go_0) {
   operations_research::sat::SolutionCallback *arg1 = (operations_research::sat::SolutionCallback *) 0 ;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  
   (arg1)->StopSearch();
-
+  
 }
 
 
@@ -675,14 +674,14 @@ _goslice_ _wrap_SolutionCallback_Response_internal_61c3741d79684a1b(operations_r
   operations_research::sat::SolutionCallback *arg1 = (operations_research::sat::SolutionCallback *) 0 ;
   operations_research::sat::CpSolverResponse result;
   _goslice_ _swig_go_result;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  
   result = ((operations_research::sat::SolutionCallback const *)arg1)->Response();
   {
     uint8_t *go_arr = (uint8_t*)malloc((&result)->ByteSizeLong());
     (&result)->SerializeToArray(go_arr, (&result)->ByteSizeLong());
-
+    
     _goslice_ slice;
     slice.array = go_arr;
     slice.len = slice.cap = (&result)->ByteSizeLong();
@@ -696,11 +695,11 @@ bool _wrap_SolutionCallback_HasResponse_internal_61c3741d79684a1b(operations_res
   operations_research::sat::SolutionCallback *arg1 = (operations_research::sat::SolutionCallback *) 0 ;
   bool result;
   bool _swig_go_result;
-
-  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolutionCallback **)&_swig_go_0; 
+  
   result = (bool)((operations_research::sat::SolutionCallback const *)arg1)->HasResponse();
-  _swig_go_result = result;
+  _swig_go_result = result; 
   return _swig_go_result;
 }
 
@@ -709,47 +708,47 @@ operations_research::sat::LogCallback *_wrap__swig_NewDirectorLogCallbackLogCall
   int arg1 ;
   operations_research::sat::LogCallback *result = 0 ;
   operations_research::sat::LogCallback *_swig_go_result;
-
-  arg1 = (int)_swig_go_0;
-
+  
+  arg1 = (int)_swig_go_0; 
+  
   result = new SwigDirector_LogCallback(arg1);
-  *(operations_research::sat::LogCallback **)&_swig_go_result = (operations_research::sat::LogCallback *)result;
+  *(operations_research::sat::LogCallback **)&_swig_go_result = (operations_research::sat::LogCallback *)result; 
   return _swig_go_result;
 }
 
 
 void _wrap_DeleteDirectorLogCallback_internal_61c3741d79684a1b(operations_research::sat::LogCallback *_swig_go_0) {
   operations_research::sat::LogCallback *arg1 = (operations_research::sat::LogCallback *) 0 ;
-
-  arg1 = *(operations_research::sat::LogCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::LogCallback **)&_swig_go_0; 
+  
   delete arg1;
-
+  
 }
 
 
 void _wrap_delete_LogCallback_internal_61c3741d79684a1b(operations_research::sat::LogCallback *_swig_go_0) {
   operations_research::sat::LogCallback *arg1 = (operations_research::sat::LogCallback *) 0 ;
-
-  arg1 = *(operations_research::sat::LogCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::LogCallback **)&_swig_go_0; 
+  
   delete arg1;
-
+  
 }
 
 
 void _wrap_LogCallback_NewMessage_internal_61c3741d79684a1b(operations_research::sat::LogCallback *_swig_go_0, _gostring_ _swig_go_1) {
   operations_research::sat::LogCallback *arg1 = (operations_research::sat::LogCallback *) 0 ;
   std::string *arg2 = 0 ;
-
-  arg1 = *(operations_research::sat::LogCallback **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::LogCallback **)&_swig_go_0; 
+  
   std::string arg2_str(_swig_go_1.p, _swig_go_1.n);
   arg2 = &arg2_str;
-
-
+  
+  
   (arg1)->NewMessage((std::string const &)*arg2);
-
+  
 }
 
 
@@ -757,8 +756,8 @@ void _wrap_SolveWrapper_SetParameters_internal_61c3741d79684a1b(operations_resea
   operations_research::sat::SolveWrapper *arg1 = (operations_research::sat::SolveWrapper *) 0 ;
   operations_research::sat::SatParameters *arg2 = 0 ;
   operations_research::sat::SatParameters temp2 ;
-
-  arg1 = *(operations_research::sat::SolveWrapper **)&_swig_go_0;
+  
+  arg1 = *(operations_research::sat::SolveWrapper **)&_swig_go_0; 
   {
     // c
     bool parsed_ok = temp2.ParseFromArray(_swig_go_1.array, _swig_go_1.len);
@@ -767,33 +766,33 @@ void _wrap_SolveWrapper_SetParameters_internal_61c3741d79684a1b(operations_resea
     }
     arg2 = &temp2;
   }
-
+  
   (arg1)->SetParameters((operations_research::sat::SatParameters const &)*arg2);
-
+  
 }
 
 
 void _wrap_SolveWrapper_AddSolutionCallback_internal_61c3741d79684a1b(operations_research::sat::SolveWrapper *_swig_go_0, operations_research::sat::SolutionCallback *_swig_go_1) {
   operations_research::sat::SolveWrapper *arg1 = (operations_research::sat::SolveWrapper *) 0 ;
   operations_research::sat::SolutionCallback *arg2 = 0 ;
-
-  arg1 = *(operations_research::sat::SolveWrapper **)&_swig_go_0;
-  arg2 = *(operations_research::sat::SolutionCallback **)&_swig_go_1;
-
+  
+  arg1 = *(operations_research::sat::SolveWrapper **)&_swig_go_0; 
+  arg2 = *(operations_research::sat::SolutionCallback **)&_swig_go_1; 
+  
   (arg1)->AddSolutionCallback((operations_research::sat::SolutionCallback const &)*arg2);
-
+  
 }
 
 
 void _wrap_SolveWrapper_ClearSolutionCallback_internal_61c3741d79684a1b(operations_research::sat::SolveWrapper *_swig_go_0, operations_research::sat::SolutionCallback *_swig_go_1) {
   operations_research::sat::SolveWrapper *arg1 = (operations_research::sat::SolveWrapper *) 0 ;
   operations_research::sat::SolutionCallback *arg2 = 0 ;
-
-  arg1 = *(operations_research::sat::SolveWrapper **)&_swig_go_0;
-  arg2 = *(operations_research::sat::SolutionCallback **)&_swig_go_1;
-
+  
+  arg1 = *(operations_research::sat::SolveWrapper **)&_swig_go_0; 
+  arg2 = *(operations_research::sat::SolutionCallback **)&_swig_go_1; 
+  
   (arg1)->ClearSolutionCallback((operations_research::sat::SolutionCallback const &)*arg2);
-
+  
 }
 
 
@@ -801,18 +800,18 @@ void _wrap_SolveWrapper_AddLogCallback_internal_61c3741d79684a1b(operations_rese
   operations_research::sat::SolveWrapper *arg1 = (operations_research::sat::SolveWrapper *) 0 ;
   SwigValueWrapper< std::function< void (std::string const &) > > arg2 ;
   std::function< void (std::string const &) > *argp2 ;
-
-  arg1 = *(operations_research::sat::SolveWrapper **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolveWrapper **)&_swig_go_0; 
+  
   argp2 = (std::function< void (std::string const &) > *)_swig_go_1;
   if (argp2 == NULL) {
     _swig_gopanic("Attempt to dereference null std::function< void (std::string const &) >");
   }
   arg2 = (std::function< void (std::string const &) >)*argp2;
-
-
+  
+  
   (arg1)->AddLogCallback(arg2);
-
+  
 }
 
 
@@ -822,8 +821,8 @@ _goslice_ _wrap_SolveWrapper_Solve_internal_61c3741d79684a1b(operations_research
   operations_research::sat::CpModelProto temp2 ;
   operations_research::sat::CpSolverResponse result;
   _goslice_ _swig_go_result;
-
-  arg1 = *(operations_research::sat::SolveWrapper **)&_swig_go_0;
+  
+  arg1 = *(operations_research::sat::SolveWrapper **)&_swig_go_0; 
   {
     // c
     bool parsed_ok = temp2.ParseFromArray(_swig_go_1.array, _swig_go_1.len);
@@ -832,12 +831,12 @@ _goslice_ _wrap_SolveWrapper_Solve_internal_61c3741d79684a1b(operations_research
     }
     arg2 = &temp2;
   }
-
+  
   result = (arg1)->Solve((operations_research::sat::CpModelProto const &)*arg2);
   {
     uint8_t *go_arr = (uint8_t*)malloc((&result)->ByteSizeLong());
     (&result)->SerializeToArray(go_arr, (&result)->ByteSizeLong());
-
+    
     _goslice_ slice;
     slice.array = go_arr;
     slice.len = slice.cap = (&result)->ByteSizeLong();
@@ -849,32 +848,32 @@ _goslice_ _wrap_SolveWrapper_Solve_internal_61c3741d79684a1b(operations_research
 
 void _wrap_SolveWrapper_StopSearch_internal_61c3741d79684a1b(operations_research::sat::SolveWrapper *_swig_go_0) {
   operations_research::sat::SolveWrapper *arg1 = (operations_research::sat::SolveWrapper *) 0 ;
-
-  arg1 = *(operations_research::sat::SolveWrapper **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolveWrapper **)&_swig_go_0; 
+  
   (arg1)->StopSearch();
-
+  
 }
 
 
 operations_research::sat::SolveWrapper *_wrap_new_SolveWrapper_internal_61c3741d79684a1b() {
   operations_research::sat::SolveWrapper *result = 0 ;
   operations_research::sat::SolveWrapper *_swig_go_result;
-
-
+  
+  
   result = (operations_research::sat::SolveWrapper *)new operations_research::sat::SolveWrapper();
-  *(operations_research::sat::SolveWrapper **)&_swig_go_result = (operations_research::sat::SolveWrapper *)result;
+  *(operations_research::sat::SolveWrapper **)&_swig_go_result = (operations_research::sat::SolveWrapper *)result; 
   return _swig_go_result;
 }
 
 
 void _wrap_delete_SolveWrapper_internal_61c3741d79684a1b(operations_research::sat::SolveWrapper *_swig_go_0) {
   operations_research::sat::SolveWrapper *arg1 = (operations_research::sat::SolveWrapper *) 0 ;
-
-  arg1 = *(operations_research::sat::SolveWrapper **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::SolveWrapper **)&_swig_go_0; 
+  
   delete arg1;
-
+  
 }
 
 
@@ -883,7 +882,7 @@ _gostring_ _wrap_CpSatHelper_ModelStats_internal_61c3741d79684a1b(_goslice_ _swi
   operations_research::sat::CpModelProto temp1 ;
   std::string result;
   _gostring_ _swig_go_result;
-
+  
   {
     // c
     bool parsed_ok = temp1.ParseFromArray(_swig_go_0.array, _swig_go_0.len);
@@ -892,9 +891,9 @@ _gostring_ _wrap_CpSatHelper_ModelStats_internal_61c3741d79684a1b(_goslice_ _swi
     }
     arg1 = &temp1;
   }
-
+  
   result = operations_research::sat::CpSatHelper::ModelStats((operations_research::sat::CpModelProto const &)*arg1);
-  _swig_go_result = Swig_AllocateString((&result)->data(), (&result)->length());
+  _swig_go_result = Swig_AllocateString((&result)->data(), (&result)->length()); 
   return _swig_go_result;
 }
 
@@ -904,7 +903,7 @@ _gostring_ _wrap_CpSatHelper_SolverResponseStats_internal_61c3741d79684a1b(_gosl
   operations_research::sat::CpSolverResponse temp1 ;
   std::string result;
   _gostring_ _swig_go_result;
-
+  
   {
     // c
     bool parsed_ok = temp1.ParseFromArray(_swig_go_0.array, _swig_go_0.len);
@@ -913,9 +912,9 @@ _gostring_ _wrap_CpSatHelper_SolverResponseStats_internal_61c3741d79684a1b(_gosl
     }
     arg1 = &temp1;
   }
-
+  
   result = operations_research::sat::CpSatHelper::SolverResponseStats((operations_research::sat::CpSolverResponse const &)*arg1);
-  _swig_go_result = Swig_AllocateString((&result)->data(), (&result)->length());
+  _swig_go_result = Swig_AllocateString((&result)->data(), (&result)->length()); 
   return _swig_go_result;
 }
 
@@ -925,7 +924,7 @@ _gostring_ _wrap_CpSatHelper_ValidateModel_internal_61c3741d79684a1b(_goslice_ _
   operations_research::sat::CpModelProto temp1 ;
   std::string result;
   _gostring_ _swig_go_result;
-
+  
   {
     // c
     bool parsed_ok = temp1.ParseFromArray(_swig_go_0.array, _swig_go_0.len);
@@ -934,9 +933,9 @@ _gostring_ _wrap_CpSatHelper_ValidateModel_internal_61c3741d79684a1b(_goslice_ _
     }
     arg1 = &temp1;
   }
-
+  
   result = operations_research::sat::CpSatHelper::ValidateModel((operations_research::sat::CpModelProto const &)*arg1);
-  _swig_go_result = Swig_AllocateString((&result)->data(), (&result)->length());
+  _swig_go_result = Swig_AllocateString((&result)->data(), (&result)->length()); 
   return _swig_go_result;
 }
 
@@ -946,7 +945,7 @@ operations_research::Domain *_wrap_CpSatHelper_VariableDomain_internal_61c3741d7
   operations_research::sat::IntegerVariableProto temp1 ;
   operations_research::Domain result;
   operations_research::Domain *_swig_go_result;
-
+  
   {
     // c
     bool parsed_ok = temp1.ParseFromArray(_swig_go_0.array, _swig_go_0.len);
@@ -955,9 +954,9 @@ operations_research::Domain *_wrap_CpSatHelper_VariableDomain_internal_61c3741d7
     }
     arg1 = &temp1;
   }
-
+  
   result = operations_research::sat::CpSatHelper::VariableDomain((operations_research::sat::IntegerVariableProto const &)*arg1);
-  *(operations_research::Domain **)&_swig_go_result = new operations_research::Domain(result);
+  *(operations_research::Domain **)&_swig_go_result = new operations_research::Domain(result); 
   return _swig_go_result;
 }
 
@@ -965,24 +964,25 @@ operations_research::Domain *_wrap_CpSatHelper_VariableDomain_internal_61c3741d7
 operations_research::sat::CpSatHelper *_wrap_new_CpSatHelper_internal_61c3741d79684a1b() {
   operations_research::sat::CpSatHelper *result = 0 ;
   operations_research::sat::CpSatHelper *_swig_go_result;
-
-
+  
+  
   result = (operations_research::sat::CpSatHelper *)new operations_research::sat::CpSatHelper();
-  *(operations_research::sat::CpSatHelper **)&_swig_go_result = (operations_research::sat::CpSatHelper *)result;
+  *(operations_research::sat::CpSatHelper **)&_swig_go_result = (operations_research::sat::CpSatHelper *)result; 
   return _swig_go_result;
 }
 
 
 void _wrap_delete_CpSatHelper_internal_61c3741d79684a1b(operations_research::sat::CpSatHelper *_swig_go_0) {
   operations_research::sat::CpSatHelper *arg1 = (operations_research::sat::CpSatHelper *) 0 ;
-
-  arg1 = *(operations_research::sat::CpSatHelper **)&_swig_go_0;
-
+  
+  arg1 = *(operations_research::sat::CpSatHelper **)&_swig_go_0; 
+  
   delete arg1;
-
+  
 }
 
 
 #ifdef __cplusplus
 }
 #endif
+

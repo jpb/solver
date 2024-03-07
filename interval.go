@@ -25,8 +25,8 @@ import (
 // size. When added to a model, it automatically enforces the following
 // properties:
 //
-//      start + size == end
-//      size >= 0
+//	start + size == end
+//	size >= 0
 //
 // It can be used to define interval-based constraints. Constraints differ in how
 // they interpret zero-sized intervals and whether the end is considered
@@ -62,9 +62,9 @@ func newInterval(start, end, size IntVar, idx int32, name string) Interval {
 			Name: name,
 			Constraint: &pb.ConstraintProto_Interval{
 				Interval: &pb.IntervalConstraintProto{
-					Start: start.index(),
-					End:   end.index(),
-					Size:  size.index(),
+					Start: start.expr().proto(),
+					End:   end.expr().proto(),
+					Size:  size.expr().proto(),
 				},
 			},
 		},

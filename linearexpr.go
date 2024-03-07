@@ -24,7 +24,7 @@ import (
 
 // LinearExpr represents a linear expression of the form:
 //
-//   5x - 7y + 21z - 42
+//	5x - 7y + 21z - 42
 //
 // In the expression above {x, y, z} are variables (IntVars) to be decided on by
 // the model, {5, -7, 21} are coefficients for said variables, and -42 is the
@@ -69,17 +69,17 @@ func Sum(vars ...IntVar) LinearExpr {
 // TODO(irfansharif): We could instead construct a linear constraint bit-by-bit,
 // setting coefficient per int var, setting offset, etc.
 //
-// 	expr := NewLinearExpr(
-// 		WithVars(...),
-// 		WithOffset(),
-// 		WithCoeffs(),
-// 	)
-// 	expr.SetCoefficient(v, 2)
-// 	expr.SetOffset(2)
+//	expr := NewLinearExpr(
+//		WithVars(...),
+//		WithOffset(),
+//		WithCoeffs(),
+//	)
+//	expr.SetCoefficient(v, 2)
+//	expr.SetOffset(2)
 
 // NewLinearExpr instantiates a new linear expression, representing:
 //
-//   sum(coefficients[i] * vars[i]) + offset
+//	sum(coefficients[i] * vars[i]) + offset
 func NewLinearExpr(vars []IntVar, coeffs []int64, offset int64) LinearExpr {
 	return &linearExpr{
 		intVars: vars,

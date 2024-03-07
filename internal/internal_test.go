@@ -35,7 +35,10 @@ func TestSimpleCPSAT(t *testing.T) {
 		Name: "x != y",
 		Constraint: &pb.ConstraintProto_AllDiff{
 			AllDiff: &pb.AllDifferentConstraintProto{
-				Vars: []int32{0, 1},
+				Exprs: []*pb.LinearExpressionProto{
+					{Vars: []int32{0}, Coeffs: []int64{1}},
+					{Vars: []int32{1}, Coeffs: []int64{1}},
+				},
 			},
 		},
 	}

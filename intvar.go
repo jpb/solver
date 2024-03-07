@@ -30,6 +30,7 @@ type IntVar interface {
 	name() string
 	index() int32
 	domain() Domain
+	expr() LinearExpr
 }
 
 // Literal is a boolean variable. It's represented using an IntVar with a fixed
@@ -105,6 +106,10 @@ func (i *intVar) domain() Domain {
 	return i.d
 }
 
+func (i *intVar) expr() LinearExpr {
+	return NewLinearExpr([]IntVar{i}, []int64{1}, 1)
+}
+
 // Not is part of the Literal interface.
 func (i *intVar) Not() Literal {
 	return &intVar{
@@ -135,6 +140,14 @@ func (is intVarList) indexes() []int32 {
 		indexes = append(indexes, iv.index())
 	}
 	return indexes
+}
+
+func (is intVarList) exprs() linearExprList {
+	exprs := make(linearExprList, len(is))
+	for i, v := range is {
+		exprs[i] = NewLinearExpr([]IntVar{v}, []int64{1}, 0)
+	}
+	return exprs
 }
 
 func asIntVars(literals []Literal) intVarList {

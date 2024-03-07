@@ -103,7 +103,7 @@ func NewAllDifferentConstraint(vars ...IntVar) Constraint {
 		pb: &pb.ConstraintProto{
 			Constraint: &pb.ConstraintProto_AllDiff{
 				AllDiff: &pb.AllDifferentConstraintProto{
-					Vars: intVarList(vars).indexes(),
+					Exprs: intVarList(vars).exprs().protos(),
 				},
 			},
 		},
@@ -122,7 +122,7 @@ func NewAllSameConstraint(vars ...IntVar) Constraint {
 		if i == 0 {
 			continue
 		}
-		cs = append(cs, NewMaximumConstraint(vars[i-1], vars[i]))
+		cs = append(cs, NewLinearMaximumConstraint(vars[i-1].expr(), vars[i].expr()))
 	}
 	return constraints{cs: cs, str: b.String()}
 }
@@ -266,12 +266,13 @@ func NewForbiddenLiteralAssignmentsConstraint(literals []Literal, assignments []
 // NewDivisionConstraint ensures that the target is to equal to
 // numerator/denominator. It also ensures that the denominator is non-zero.
 func NewDivisionConstraint(target, numerator, denominator IntVar) Constraint {
+	vars := []IntVar{numerator, denominator}
 	return &constraint{
 		pb: &pb.ConstraintProto{
 			Constraint: &pb.ConstraintProto_IntDiv{
-				IntDiv: &pb.IntegerArgumentProto{
-					Target: target.index(),
-					Vars:   intVarList([]IntVar{numerator, denominator}).indexes(),
+				IntDiv: &pb.LinearArgumentProto{
+					Target: target.expr().proto(),
+					Exprs:  intVarList(vars).exprs().protos(),
 				},
 			},
 		},
@@ -294,9 +295,9 @@ func NewProductConstraint(target IntVar, multiplicands ...IntVar) Constraint {
 	return &constraint{
 		pb: &pb.ConstraintProto{
 			Constraint: &pb.ConstraintProto_IntProd{
-				IntProd: &pb.IntegerArgumentProto{
-					Target: target.index(),
-					Vars:   intVarList(multiplicands).indexes(),
+				IntProd: &pb.LinearArgumentProto{
+					Target: target.expr().proto(),
+					Exprs:  intVarList(multiplicands).exprs().protos(),
 				},
 			},
 		},
@@ -304,35 +305,35 @@ func NewProductConstraint(target IntVar, multiplicands ...IntVar) Constraint {
 	}
 }
 
-// NewMaximumConstraint ensures that the target is equal to the maximum of all
-// variables.
-func NewMaximumConstraint(target IntVar, vars ...IntVar) Constraint {
-	return &constraint{
-		pb: &pb.ConstraintProto{
-			Constraint: &pb.ConstraintProto_IntMax{
-				IntMax: &pb.IntegerArgumentProto{
-					Target: target.index(),
-					Vars:   intVarList(vars).indexes(),
-				},
-			},
-		},
-	}
-}
+// // NewMaximumConstraint ensures that the target is equal to the maximum of all
+// // variables.
+// func NewMaximumConstraint(target IntVar, vars ...IntVar) Constraint {
+//	return &constraint{
+//		pb: &pb.ConstraintProto{
+//			Constraint: &pb.ConstraintProto_IntMax{
+//				IntMax: &pb.LinearArgumentProto{
+//					Target: target.index(),
+//					Vars:   intVarList(vars).indexes(),
+//				},
+//			},
+//		},
+//	}
+// }
 
-// NewMinimumConstraint ensures that the target is equal to the minimum of all
-// variables.
-func NewMinimumConstraint(target IntVar, vars ...IntVar) Constraint {
-	return &constraint{
-		pb: &pb.ConstraintProto{
-			Constraint: &pb.ConstraintProto_IntMin{
-				IntMin: &pb.IntegerArgumentProto{
-					Target: target.index(),
-					Vars:   intVarList(vars).indexes(),
-				},
-			},
-		},
-	}
-}
+// // NewMinimumConstraint ensures that the target is equal to the minimum of all
+// // variables.
+// func NewMinimumConstraint(target IntVar, vars ...IntVar) Constraint {
+//	return &constraint{
+//		pb: &pb.ConstraintProto{
+//			Constraint: &pb.ConstraintProto_IntMin{
+//				IntMin: &pb.LinearArgumentProto{
+//					Target: target.index(),
+//					Vars:   intVarList(vars).indexes(),
+//				},
+//			},
+//		},
+//	}
+// }
 
 // NewModuloConstraint ensures that the target to equal to dividend%divisor. The
 // domain of the divisor must be strictly positive.
@@ -343,9 +344,9 @@ func NewModuloConstraint(target, dividend, divisor IntVar) Constraint {
 	return &constraint{
 		pb: &pb.ConstraintProto{
 			Constraint: &pb.ConstraintProto_IntMod{
-				IntMod: &pb.IntegerArgumentProto{
-					Target: target.index(),
-					Vars:   intVarList([]IntVar{dividend, divisor}).indexes(),
+				IntMod: &pb.LinearArgumentProto{
+					Target: target.expr().proto(),
+					Exprs:  intVarList([]IntVar{dividend, divisor}).exprs().protos(),
 				},
 			},
 		},
@@ -370,8 +371,7 @@ func NewForbiddenAssignmentsConstraint(vars []IntVar, assignments [][]int64) Con
 // NewLinearConstraint ensures that the linear expression lies in the given
 // domain. It can be used to express linear equalities of the form:
 //
-// 		0 <= x + 2y <= 10
-//
+//	0 <= x + 2y <= 10
 func NewLinearConstraint(e LinearExpr, d Domain) Constraint {
 	var b strings.Builder
 	b.WriteString("linear-constraint: ")
@@ -420,20 +420,20 @@ func NewLinearMaximumConstraint(target LinearExpr, exprs ...LinearExpr) Constrai
 	}
 }
 
-// NewLinearMinimumConstraint ensures that the target is equal to the minimum of
-// all linear expressions.
-func NewLinearMinimumConstraint(target LinearExpr, exprs ...LinearExpr) Constraint {
-	return &constraint{
-		pb: &pb.ConstraintProto{
-			Constraint: &pb.ConstraintProto_LinMin{
-				LinMin: &pb.LinearArgumentProto{
-					Target: target.proto(),
-					Exprs:  linearExprList(exprs).protos(),
-				},
-			},
-		},
-	}
-}
+// // NewLinearMinimumConstraint ensures that the target is equal to the minimum of
+// // all linear expressions.
+// func NewLinearMinimumConstraint(target LinearExpr, exprs ...LinearExpr) Constraint {
+//	return &constraint{
+//		pb: &pb.ConstraintProto{
+//			Constraint: &pb.ConstraintProto_LinMin{
+//				LinMin: &pb.LinearArgumentProto{
+//					Target: target.proto(),
+//					Exprs:  linearExprList(exprs).protos(),
+//				},
+//			},
+//		},
+//	}
+// }
 
 // NewElementConstraint ensures that the target is equal to vars[index].
 // Implicitly index takes on one of the values in [0, len(vars)).
@@ -482,15 +482,14 @@ func NewNonOverlappingConstraint(intervals ...Interval) Constraint {
 // NewNonOverlapping2DConstraint ensures that the boxes defined by the following
 // don't overlap:
 //
-// 		[xintervals[i].start, xintervals[i].end)
-// 		[yintervals[i].start, yintervals[i].end)
+//	[xintervals[i].start, xintervals[i].end)
+//	[yintervals[i].start, yintervals[i].end)
 //
 // Intervals/boxes of size zero are considered for overlap if the last argument
 // is true.
 func NewNonOverlapping2DConstraint(
 	xintervals []Interval,
 	yintervals []Interval,
-	boxesWithNoAreaCanOverlap bool,
 ) Constraint {
 	return &constraint{
 		pb: &pb.ConstraintProto{
@@ -498,8 +497,6 @@ func NewNonOverlapping2DConstraint(
 				NoOverlap_2D: &pb.NoOverlap2DConstraintProto{
 					XIntervals: intervalList(xintervals).indexes(),
 					YIntervals: intervalList(yintervals).indexes(),
-
-					BoxesWithNullAreaCanOverlap: boxesWithNoAreaCanOverlap,
 				},
 			},
 		},
@@ -525,9 +522,9 @@ func NewCumulativeConstraint(capacity IntVar, intervals []Interval, demands []In
 		pb: &pb.ConstraintProto{
 			Constraint: &pb.ConstraintProto_Cumulative{
 				Cumulative: &pb.CumulativeConstraintProto{
-					Capacity:  capacity.index(),
+					Capacity:  capacity.expr().proto(),
 					Intervals: intervalList(intervals).indexes(),
-					Demands:   intVarList(demands).indexes(),
+					Demands:   intVarList(demands).exprs().protos(),
 				},
 			},
 		},
