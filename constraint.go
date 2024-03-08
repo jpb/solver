@@ -122,7 +122,7 @@ func NewAllSameConstraint(vars ...IntVar) Constraint {
 		if i == 0 {
 			continue
 		}
-		cs = append(cs, NewLinearMaximumConstraint(vars[i-1].expr(), vars[i].expr()))
+		cs = append(cs, NewLinearMaximumConstraint(vars[i-1].AsLinearExpr(), vars[i].AsLinearExpr()))
 	}
 	return constraints{cs: cs, str: b.String()}
 }
@@ -271,7 +271,7 @@ func NewDivisionConstraint(target, numerator, denominator IntVar) Constraint {
 		pb: &pb.ConstraintProto{
 			Constraint: &pb.ConstraintProto_IntDiv{
 				IntDiv: &pb.LinearArgumentProto{
-					Target: target.expr().proto(),
+					Target: target.AsLinearExpr().proto(),
 					Exprs:  intVarList(vars).exprs().protos(),
 				},
 			},
@@ -296,7 +296,7 @@ func NewProductConstraint(target IntVar, multiplicands ...IntVar) Constraint {
 		pb: &pb.ConstraintProto{
 			Constraint: &pb.ConstraintProto_IntProd{
 				IntProd: &pb.LinearArgumentProto{
-					Target: target.expr().proto(),
+					Target: target.AsLinearExpr().proto(),
 					Exprs:  intVarList(multiplicands).exprs().protos(),
 				},
 			},
@@ -345,7 +345,7 @@ func NewModuloConstraint(target, dividend, divisor IntVar) Constraint {
 		pb: &pb.ConstraintProto{
 			Constraint: &pb.ConstraintProto_IntMod{
 				IntMod: &pb.LinearArgumentProto{
-					Target: target.expr().proto(),
+					Target: target.AsLinearExpr().proto(),
 					Exprs:  intVarList([]IntVar{dividend, divisor}).exprs().protos(),
 				},
 			},
@@ -507,7 +507,7 @@ func NewNonOverlapping2DConstraint(
 // (intervals[i]'s demand is specified in demands[i]) at each interval point
 // cannot exceed a max capacity. The intervals are interpreted as [start, end).
 // Intervals of size zero are ignored.
-func NewCumulativeConstraint(capacity IntVar, intervals []Interval, demands []IntVar) Constraint {
+func NewCumulativeConstraint(capacity LinearExpr, intervals []Interval, demands []LinearExpr) Constraint {
 	if len(intervals) != len(demands) {
 		panic("mismatched lengths of intervals and demands")
 	}
@@ -516,19 +516,19 @@ func NewCumulativeConstraint(capacity IntVar, intervals []Interval, demands []In
 		if i != 0 {
 			b.WriteString(", ")
 		}
-		b.WriteString(fmt.Sprintf("%s: %s", intervals[i].name(), demands[i].name()))
+		b.WriteString(fmt.Sprintf("%s: %s", intervals[i].name(), demands[i].String()))
 	}
 	return &constraint{
 		pb: &pb.ConstraintProto{
 			Constraint: &pb.ConstraintProto_Cumulative{
 				Cumulative: &pb.CumulativeConstraintProto{
-					Capacity:  capacity.expr().proto(),
+					Capacity:  capacity.proto(),
 					Intervals: intervalList(intervals).indexes(),
-					Demands:   intVarList(demands).exprs().protos(),
+					Demands:   linearExprList(demands).protos(),
 				},
 			},
 		},
-		str: fmt.Sprintf("cumulative: %s | %s", b.String(), capacity.name()),
+		str: fmt.Sprintf("cumulative: %s | %s", b.String(), capacity.String()),
 	}
 }
 

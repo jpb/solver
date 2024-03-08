@@ -62,9 +62,9 @@ func newInterval(start, end, size IntVar, idx int32, name string) Interval {
 			Name: name,
 			Constraint: &pb.ConstraintProto_Interval{
 				Interval: &pb.IntervalConstraintProto{
-					Start: start.expr().proto(),
-					End:   end.expr().proto(),
-					Size:  size.expr().proto(),
+					Start: start.AsLinearExpr().proto(),
+					End:   end.AsLinearExpr().proto(),
+					Size:  size.AsLinearExpr().proto(),
 				},
 			},
 		},

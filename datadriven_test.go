@@ -215,11 +215,15 @@ func TestDatadriven(t *testing.T) {
 				case ast.CumulativeMethod: // constrain.cumulative(i: 12, j: 13 | 32)
 					argument := stmt.Argument.(*ast.CumulativeArgument)
 					capacity := getIntVars(s, argument.Capacity)[0]
+					demands := []solver.LinearExpr{}
+					for _, v := range getIntVars(s, argument.Demands()...) {
+						demands = append(demands, v.AsLinearExpr())
+					}
 					model.AddConstraints(
 						solver.NewCumulativeConstraint(
-							capacity,
+							capacity.AsLinearExpr(),
 							getIntervals(s, argument.Intervals()...),
-							getIntVars(s, argument.Demands()...),
+							demands,
 						),
 					)
 				case ast.BinaryOpMethod: // constrain.binary-op(a % b == c)
