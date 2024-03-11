@@ -30,7 +30,7 @@ type IntVar interface {
 	name() string
 	index() int32
 	domain() Domain
-	AsLinearExpr() LinearExpr
+	Expr() LinearExpr
 }
 
 // Literal is a boolean variable. It's represented using an IntVar with a fixed
@@ -106,7 +106,7 @@ func (i *intVar) domain() Domain {
 	return i.d
 }
 
-func (i *intVar) AsLinearExpr() LinearExpr {
+func (i *intVar) Expr() LinearExpr {
 	return NewLinearExpr([]IntVar{i}, []int64{1}, 0)
 }
 

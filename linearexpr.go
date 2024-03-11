@@ -22,6 +22,10 @@ import (
 	"github.com/irfansharif/solver/internal/pb"
 )
 
+type Expr interface {
+	Expr() LinearExpr
+}
+
 // LinearExpr represents a linear expression of the form:
 //
 //	5x - 7y + 21z - 42
@@ -40,6 +44,8 @@ type LinearExpr interface {
 	offset() int64
 	coeffs() []int64
 	proto() *pb.LinearExpressionProto
+
+	Expr
 }
 
 type linearExpr struct {
@@ -51,6 +57,10 @@ type linearExpr struct {
 // Parameters is part of the LinearExpr interface.
 func (l *linearExpr) Parameters() (vars []IntVar, coeffs []int64, offset int64) {
 	return l.intVars, l.coeffs(), l.offset()
+}
+
+func (l *linearExpr) Expr() LinearExpr {
+	return l
 }
 
 var _ LinearExpr = &linearExpr{}

@@ -217,11 +217,11 @@ func TestDatadriven(t *testing.T) {
 					capacity := getIntVars(s, argument.Capacity)[0]
 					demands := []solver.LinearExpr{}
 					for _, v := range getIntVars(s, argument.Demands()...) {
-						demands = append(demands, v.AsLinearExpr())
+						demands = append(demands, v.Expr())
 					}
 					model.AddConstraints(
 						solver.NewCumulativeConstraint(
-							capacity.AsLinearExpr(),
+							capacity.Expr(),
 							getIntervals(s, argument.Intervals()...),
 							demands,
 						),

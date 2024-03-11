@@ -122,7 +122,7 @@ func NewAllSameConstraint(vars ...IntVar) Constraint {
 		if i == 0 {
 			continue
 		}
-		cs = append(cs, NewLinearMaximumConstraint(vars[i-1].AsLinearExpr(), vars[i].AsLinearExpr()))
+		cs = append(cs, NewLinearMaximumConstraint(vars[i-1].Expr(), vars[i].Expr()))
 	}
 	return constraints{cs: cs, str: b.String()}
 }
@@ -271,7 +271,7 @@ func NewDivisionConstraint(target, numerator, denominator IntVar) Constraint {
 		pb: &pb.ConstraintProto{
 			Constraint: &pb.ConstraintProto_IntDiv{
 				IntDiv: &pb.LinearArgumentProto{
-					Target: target.AsLinearExpr().proto(),
+					Target: target.Expr().proto(),
 					Exprs:  intVarList(vars).exprs().protos(),
 				},
 			},
@@ -296,7 +296,7 @@ func NewProductConstraint(target IntVar, multiplicands ...IntVar) Constraint {
 		pb: &pb.ConstraintProto{
 			Constraint: &pb.ConstraintProto_IntProd{
 				IntProd: &pb.LinearArgumentProto{
-					Target: target.AsLinearExpr().proto(),
+					Target: target.Expr().proto(),
 					Exprs:  intVarList(multiplicands).exprs().protos(),
 				},
 			},
@@ -337,20 +337,20 @@ func NewProductConstraint(target IntVar, multiplicands ...IntVar) Constraint {
 
 // NewModuloConstraint ensures that the target to equal to dividend%divisor. The
 // domain of the divisor must be strictly positive.
-func NewModuloConstraint(target, dividend, divisor IntVar) Constraint {
-	if !divisor.domain().positive() {
-		panic("invalid domain for divisor: not strictly positive")
-	}
+func NewModuloConstraint(target, dividend, divisor Expr) Constraint {
 	return &constraint{
 		pb: &pb.ConstraintProto{
 			Constraint: &pb.ConstraintProto_IntMod{
 				IntMod: &pb.LinearArgumentProto{
-					Target: target.AsLinearExpr().proto(),
-					Exprs:  intVarList([]IntVar{dividend, divisor}).exprs().protos(),
+					Target: target.Expr().proto(),
+					Exprs: []*pb.LinearExpressionProto{
+						dividend.Expr().proto(),
+						divisor.Expr().proto(),
+					},
 				},
 			},
 		},
-		str: fmt.Sprintf("%s == %s %% %s", target.name(), dividend.name(), divisor.name()),
+		str: fmt.Sprintf("%s == %s %% %s", target.Expr().String(), dividend.Expr().String(), divisor.Expr().String()),
 	}
 }
 
