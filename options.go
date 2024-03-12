@@ -73,7 +73,7 @@ func WithLogger(w io.Writer, prefix string) Option {
 func WithParallelism(parallelism int) Option {
 	return func(options *options, w internal.SolveWrapper) {
 		threads := int32(parallelism)
-		options.params.NumSearchWorkers = &threads
+		options.params.NumWorkers = &threads
 	}
 }
 
