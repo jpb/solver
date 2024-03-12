@@ -77,6 +77,13 @@ func WithParallelism(parallelism int) Option {
 	}
 }
 
+// WithPresolve enables or disables presolving of the cp model
+func WithPresolve(b bool) Option {
+	return func(options *options, w internal.SolveWrapper) {
+		options.params.CpModelPresolve = &b
+	}
+}
+
 // WithEnumeration configures the solver to enumerate over all solutions without
 // objective. This option is incompatible with a parallelism greater than 1.
 func WithEnumeration(f func(Result)) Option {
