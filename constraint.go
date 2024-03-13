@@ -265,18 +265,25 @@ func NewForbiddenLiteralAssignmentsConstraint(literals []Literal, assignments []
 
 // NewDivisionConstraint ensures that the target is to equal to
 // numerator/denominator. It also ensures that the denominator is non-zero.
-func NewDivisionConstraint(target, numerator, denominator IntVar) Constraint {
-	vars := []IntVar{numerator, denominator}
+func NewDivisionConstraint(target, numerator, denominator Expr) Constraint {
 	return &constraint{
 		pb: &pb.ConstraintProto{
 			Constraint: &pb.ConstraintProto_IntDiv{
 				IntDiv: &pb.LinearArgumentProto{
 					Target: target.Expr().proto(),
-					Exprs:  intVarList(vars).exprs().protos(),
+					Exprs: []*pb.LinearExpressionProto{
+						numerator.Expr().proto(),
+						denominator.Expr().proto(),
+					},
 				},
 			},
 		},
-		str: fmt.Sprintf("%s == %s / %s", target.name(), numerator.name(), denominator.name()),
+		str: fmt.Sprintf(
+			"%s == %s / %s",
+			target.Expr().String(),
+			numerator.Expr().String(),
+			denominator.Expr().String(),
+		),
 	}
 }
 
