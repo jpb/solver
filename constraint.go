@@ -290,13 +290,17 @@ func NewDivisionConstraint(target, numerator, denominator Expr) Constraint {
 // NewProductConstraint ensures that the target to equal to the product of all
 // multiplicands. An empty multiplicands list forces the target to be equal to
 // one.
-func NewProductConstraint(target IntVar, multiplicands ...IntVar) Constraint {
+func NewProductConstraint(target Expr, multiplicands ...Expr) Constraint {
 	var b strings.Builder
 	for i, m := range multiplicands {
 		if i != 0 {
 			b.WriteString(" * ")
 		}
-		b.WriteString(m.name())
+		b.WriteString(m.Expr().String())
+	}
+	exprs := []*pb.LinearExpressionProto{}
+	for _, m := range multiplicands {
+		exprs = append(exprs, m.Expr().proto())
 	}
 
 	return &constraint{
@@ -304,11 +308,11 @@ func NewProductConstraint(target IntVar, multiplicands ...IntVar) Constraint {
 			Constraint: &pb.ConstraintProto_IntProd{
 				IntProd: &pb.LinearArgumentProto{
 					Target: target.Expr().proto(),
-					Exprs:  intVarList(multiplicands).exprs().protos(),
+					Exprs:  exprs,
 				},
 			},
 		},
-		str: fmt.Sprintf("%s == %s", target.name(), b.String()),
+		str: fmt.Sprintf("%s == %s", target.Expr().String(), b.String()),
 	}
 }
 
